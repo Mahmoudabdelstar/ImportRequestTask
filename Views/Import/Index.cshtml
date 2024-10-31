@@ -1,0 +1,60 @@
+﻿@using ImportRequest = Task.Data.Entities.ImportRequest
+@model List<ImportRequest>
+@{
+    ViewData["Title"] = "Import Requests";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+
+
+<button class="btn btn-secondary" onclick="location.href='@Url.Action("CreateNewRequest", "Import")'"> Create New</button>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ImporterName </th>
+            <th>ImporterEmail</th>
+            <th>ImporterMobile </th>
+            <th>ExportCountry </th>
+            <th>ExportCity  </th>
+            <th>ImportDate   </th>
+            <th>View   </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            <tr>
+                <td>@request.ImporterName</td>
+                <td>@request.ImporterEmail</td>
+                <td>@request.ImporterMobile</td>
+                <td>@request.ExportCountry</td>
+                <td>@request.ExportCity</td>
+                <td>@request.ImportDate.ToString("yyyy-MM-dd ")</td>
+                <td><button class="btn btn-secondary Viewrequest" data-id="@request.Id"> View</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal fade" id="ShowRequestDetail" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">View Request Detail</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="RequestDetail">
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

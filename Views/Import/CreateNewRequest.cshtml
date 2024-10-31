@@ -1,0 +1,156 @@
+﻿@using Task.Models;
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ImportRequestResponseViewModel
+<style>
+    .tab-content {
+        margin-top: 20px;
+    }
+</style>
+<h1>Create New Import Request Wizard </h1>
+
+    
+<div class="container ">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1" aria-selected="true">Importer Info</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab" aria-controls="tab2" aria-selected="false">Select Items</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <p class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab" aria-controls="tab3" aria-selected="false">View request</p>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="ImporterName" class="form-label">Importer Name</label>
+                    <input type="text" class="form-control input" id="ImporterName" placeholder="Importer Name" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="ImporterEmail" class="form-label">Importer Email</label>
+                        <input type="email" class="form-control input" id="ImporterEmail" placeholder="Importer Email" required>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="ImporterMobile" class="form-label">Importer Mobile</label>
+                        <input type="text" class="form-control input" id="ImporterMobile" placeholder="Importer Mobile" required>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="ExportCountry" class="form-label">Export Country</label>
+                        <input type="text" class="form-control input" id="ExportCountry" placeholder="Export Country" required>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="ExportCity" class="form-label">Export City</label>
+                        <input type="text" class="form-control input" id="ExportCity" placeholder="ExportCity" required>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="ImportDate" class="form-label">Import Date</label>
+                        <input type="date" class="form-control input" id="ImportDate" placeholder="Import Date" required>
+                </div>
+       
+            </div>
+            <button class="btn btn-primary float-end next-tab">Next</button>
+        </div>
+        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+            <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="itemName" class="form-label"> Item</label>
+                    <select class="form-control" id="itemName" >
+                        <option value="">Select</option>
+                        @foreach (var item in Model.ItemsList)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+
+                        }
+                    </select>
+
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label for="ItemCount" class="form-label">Item Count</label>
+                    <input type="number" min="0"value="1" class="form-control" id="ItemCount" >
+                </div>
+                <div class="mb-3 col-md-6">
+                    <button class="btn btn-success" id="AddItem" placeholder="Import Date">Add Item </button>
+                </div>
+
+                <table id="ItemTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            
+               
+                    </tbody>
+                </table>
+            </div>
+
+
+            <button class="btn btn-secondary prev-tab">Previous</button>
+            <button class="btn btn-primary float-end next-tab">Next</button>
+        </div>
+        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+      
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="ImporterNameText" class="form-label">Importer Name</label>
+                        <p id="ImporterNameText">  </p>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="ImporterEmailText" class="form-label">Importer Email</label>
+                        <p id="ImporterEmailText">  </p>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="ImporterMobileText" class="form-label">Importer Mobile</label>
+                        <p id="ImporterMobileText">  </p>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="ExportCountry" class="form-label">Export Country</label>
+                        <p id="ExportCountryText">  </p>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="ExportCityText" class="form-label">Export City</label>
+                        <p id="ExportCityText">  </p>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="ImportDate" class="form-label">Import Date</label>
+                        <p id="ImportDateText">  </p>
+                    </div>
+
+
+                    <hr />
+
+                    <table id="ItemTableView" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Item Name</th>
+                                <th scope="col">Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            <button class="btn btn-secondary prev-tab">Previous</button>
+            <button id="SaveRequest"  class="btn btn-success float-end next-tab">Save Request</button>
+
+        </div>
+    </div>
+</div>
+
+
+
+

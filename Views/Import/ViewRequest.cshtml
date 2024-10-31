@@ -1,0 +1,72 @@
+﻿@using Task.Models;
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ImportRequestResponseViewModel
+
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link href="~/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/bootstrap.rtl.css" rel="stylesheet" />
+<link href="~/css/bootstrap.rtl.min.css" rel="stylesheet" />
+<link href="~/css/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> 
+<div class="container">
+
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label for="ImporterNameText" class="form-label">Importer Name</label>
+            <p id="ImporterNameText"> @Model.ImporterName </p>
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label for="ImporterEmailText" class="form-label">Importer Email</label>
+            <p id="ImporterEmailText"> @Model.ImporterEmail  </p>
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label for="ImporterMobileText" class="form-label">Importer Mobile</label>
+            <p id="ImporterMobileText">  @Model.ImporterMobile </p>
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label for="ExportCountryText" class="form-label">Export Country</label>
+            <p id="ExportCountryText">   @Model.ExportCountry</p>
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label for="ExportCityText" class="form-label">Export City</label>
+            <p id="ExportCityText"> @Model.ExportCity  </p>
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label for="ImportDateText" class="form-label">Import Date</label>
+            <p id="ImportDateText"> @Model.ImportDate.ToString("yyyy-MM-dd ")  </p>
+        </div>
+         
+
+        <table id="ItemTableView" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ItemsList)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Count
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
